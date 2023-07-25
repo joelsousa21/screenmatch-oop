@@ -1,4 +1,4 @@
 package screenmatch.models;
 
-public record TitleOmdb() {
+public record TitleOmdb(String title, String year, String runtime) {
 }

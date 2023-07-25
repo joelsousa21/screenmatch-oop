@@ -1,5 +1,8 @@
 package screenmatch.models;
 
+import com.google.gson.annotations.SerializedName;
+import screenmatch.exception.ErrorOfYearConvertionException;
+
 public class Title implements Comparable<Title>  {
     private String name;
     private int releaseYear;
@@ -11,6 +14,16 @@ public class Title implements Comparable<Title>  {
     public Title(String name, int releaseYear) {
         this.name = name;
         this.releaseYear = releaseYear;
+    }
+
+    public Title(TitleOmdb myTitleOmdb) {
+        this.name = myTitleOmdb.title();
+        if(myTitleOmdb.year().length() > 4) {
+            throw new ErrorOfYearConvertionException("Não consegui converter o ano, porque tem mais de 4 caracteres.");
+        }
+        this.releaseYear = Integer.valueOf(myTitleOmdb.year());
+        this.durationInMinutes = Integer.valueOf(myTitleOmdb.runtime().substring(0,3));
+
     }
 
     public int getTotalOfAvaliations(){
@@ -66,5 +79,11 @@ public class Title implements Comparable<Title>  {
     @Override
     public int compareTo(Title otherTitle) {
         return this.getName().compareTo(otherTitle.getName());
+    }
+
+    @Override
+    public String toString() {
+        return "(name='" + name + '\'' +
+                ", releaseYear=" + releaseYear + "," + "durationInMinutes="+durationInMinutes + ")";
     }
 }
