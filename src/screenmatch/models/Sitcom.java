@@ -6,6 +6,10 @@ public class Sitcom extends Title {
     private int episodesPerSeason;
     private int minutesPerEpisode;
 
+    public Sitcom(String name, int releaseYear) {
+        super(name, releaseYear);
+    }
+
     public int getSeasons() {
         return seasons;
     }
@@ -41,5 +45,10 @@ public class Sitcom extends Title {
     @Override
     public int getDurationInMinutes() {
         return seasons * episodesPerSeason * minutesPerEpisode;
+    }
+
+    @Override
+    public String toString() {
+        return "Série: " + this.getName() + " (" + this.getReleaseYear() + ")";
     }
 }

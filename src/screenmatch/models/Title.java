@@ -1,12 +1,17 @@
 package screenmatch.models;
 
-public class Title {
+public class Title implements Comparable<Title>  {
     private String name;
     private int releaseYear;
     private boolean includedInPlan;
     private double sumOfAvaluations;
     private int totalOfAvaliations;
     private int durationInMinutes;
+
+    public Title(String name, int releaseYear) {
+        this.name = name;
+        this.releaseYear = releaseYear;
+    }
 
     public int getTotalOfAvaliations(){
         return totalOfAvaliations;
@@ -56,5 +61,10 @@ public class Title {
 
     public double getMedia(){
         return sumOfAvaluations / totalOfAvaliations;
+    }
+
+    @Override
+    public int compareTo(Title otherTitle) {
+        return this.getName().compareTo(otherTitle.getName());
     }
 }
